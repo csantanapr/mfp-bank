@@ -4,7 +4,7 @@
 - [ ] Open Terminal and run webapp
 
 ```bash
-cd ~/Desktop/mfpbank
+cd IonicProject
 ionic serve
 ```
 
