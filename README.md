@@ -33,7 +33,7 @@
 
 ## MobileFirst Demo MobileFirst Platform Banking (MFPBank)
 
-[MFPBank Source Code](https://hub.jazz.net/project/csantana/mfpbank/overview) hosted on [IBM Bluemix DevOps Services](https://hub.jazz.net/)
+[MFPBank Source Code](https://hub.jazz.net/project/csantana/mfp-bank/overview) hosted on [IBM Bluemix DevOps Services](https://hub.jazz.net/)
 <iframe src="https://mfpbank.mybluemix.net" width="320" height="568">
  <p>Your browser does not support iframes. Or Markdown parser didn't liked iframes</p>
 </iframe>
