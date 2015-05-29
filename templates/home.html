@@ -1,0 +1,47 @@
+<ion-view view-title="{{label}}">
+  <ion-content>
+    <div class="row" style="margin-left:5px; margin-right:5px">
+      <div class="col" style="padding:2px; font-size:20px">
+        {{welcome}}
+      </div>
+    </div>
+    <div class="row" style="margin-bottom: 30px; font-size:18px;">
+      <div class="col" style="padding:2px; margin-left:5px">
+        {{totalBalanceLabel}}
+      </div>
+      <div class="col" style="text-align: right; padding:2px; margin-right:5px">
+        {{totalBalance | currency}}
+      </div>
+   </div>
+    <div class="list card home-list">
+      
+      <a href="#/app/offers" class="item item-icon-left">
+        <i class="icon"><img src="img/offers_blue.png"></i> My Offers
+      </a>
+      <a href="#/app/accounts" class="item item-icon-left">
+        <i class="icon"><img src="img/safe_blue.png"></i> Accounts
+      </a>
+      <a href="#/app/transfer" class="item item-icon-left">
+        <i class="icon"><img src="img/transfer_blue.png"></i>Transfer
+      </a>
+      <a href="#/app/deposit" class="item item-icon-left">
+        <i class="icon"><img src="img/check_blue.png"></i> Deposit Check
+      </a>
+ 
+      
+    </div>
+    
+    
+    
+  </ion-content>
+  <!-- Demo Moving My Offers to bottom right to be easier to reach
+  <div class="list home-list" style="bottom: 0px; position:absolute; width:100%;">
+      
+      <a href="#/app/offers" class="item item-icon-left" style="height:50px;border-color: transparent;">
+        <i class="icon" style="right: 0px; font-size:20px; text-align: center;right: 5px;left: initial;"><img src="img/offers_blue.png" >My Offers</i> 
+      </a>
+  </div>
+  -->
+   
+  
+</ion-view>

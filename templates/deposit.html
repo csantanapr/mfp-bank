@@ -1,0 +1,28 @@
+<ion-view view-title="{{label}}">
+  <ion-content>
+   <div class="list">
+    <div class="row">
+      <div class="col text-center">Front side photo
+      </div>
+    </div>
+    <div class="row" ng-click="getFrontPhoto()">
+      <img ng-src="{{frontPhoto}}" style="display: block;margin-left:auto;margin-right:auto;" height="100px"></img>
+    </div>
+    <div class="row">
+      <div class="col text-center">Back side photo
+      </div>
+    </div>
+    <div class="row" ng-click="getBackPhoto()">
+      <img ng-src="{{backPhoto}}" style="display: block;margin-left:auto;margin-right:auto;" height="100px"></img>
+    </div>
+    <div class="row">
+        <p class="col">Tap on the camera to take a photo of each side of the check, 
+          then verify front and back photos of the check you wish to deplosit 
+          and click Deposit button below.</p>
+    </div>
+    <button class="button button-block button-positive"  ng-click="showAlert()">
+        Submit
+    </button>
+    </div>
+  </ion-content>
+</ion-view>
