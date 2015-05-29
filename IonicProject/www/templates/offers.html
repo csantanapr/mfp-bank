@@ -1,0 +1,17 @@
+<ion-view view-title="{{label}}">
+  <ion-content>
+     <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+    <ion-list>
+      <ion-item ng-repeat="item in items" class="item-body">
+        <div class="offer-heading"style="font-size:22px; margin-bottom:5px; text-align:center">{{item.title}}</div>
+        <img style="width:75%;display: block;margin-left:auto;margin-right:auto;" ng-src="{{item.imageUrl}}">
+        <p>
+          {{item.description}}
+        </p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

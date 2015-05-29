@@ -1,0 +1,51 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar>
+      <ion-nav-back-button>Back</ion-nav-back-button>
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+  <ion-side-menu side="left" style="background-color:#83d1f5">
+    <ion-content>
+      <ion-list class="menu-list">
+        <ion-item nav-clear menu-close href="#/app/home" class="item-icon-left">
+          <i class="icon"><img src="img/house_blue_dk.png"></i>
+          Home
+       </ion-item>
+        <ion-item nav-clear menu-close href="#/app/accounts" class="item-icon-left">
+          <i class="icon"><img src="img/safe_blue_dk.png"></i>
+          Accounts
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/transfer" class="item-icon-left">
+          <i class="icon"><img src="img/transfer_blue_dk.png"></i>
+          Transfer
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/deposit" class="item-icon-left">
+          <i class="icon"><img src="img/check_blue_dk.png"></i>
+          Deposit
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/offers" class="item-icon-left">
+          <i class="icon"><img src="img/offers_blue_dk.png"></i>
+          Offers
+        </ion-item>
+        <div class="item item-divider">
+        Support
+        </div>
+        <ion-item nav-clear menu-close ng-click="sendFeedBack()" class="item-icon-left">
+          <i class="icon"><img src="img/feedback_blue_dk.png"></i>
+          Provide Feedback
+        </ion-item>
+        <ion-item nav-clear menu-close ng-click="sendBug()" class="item-icon-left">
+          <i class="icon"><img src="img/bug_blue_dk.png"></i>
+          Report Bug
+        </ion-item>
+        
+        <div nav-clear menu-close  ng-click="clearStore()" class="item-icon-left" style="height:40px;background-color:#83d1f5">
+        </div>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

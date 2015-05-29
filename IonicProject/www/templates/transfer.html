@@ -1,0 +1,28 @@
+<ion-view view-title="{{label}}">
+  <ion-content>
+    <div class="list list-inset">
+    <form>
+      <label class="item item-input item-select">
+        <div class="input-label">From Account</div>
+        <select>
+          <option>Savings</option>
+          <option>Checking</option>
+        </select>
+      </label>
+      <label class="item item-input item-select">
+        <div class="input-label">To Account</div>
+        <select>
+          <option>Checking</option>
+          <option>Savings</option>
+        </select>
+      </label>
+      <label class="item item item-input">
+        $<input name="amount" ng-model="transfer.amount" ng-model-options="{ getterSetter: true }" type="number" min="1" step="10" placeholder="Amount to transfer">
+      </label>
+      <button class="button button-block button-positive" ng-click="showConfirm()">
+        Submit
+      </button>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>

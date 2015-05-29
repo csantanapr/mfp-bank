@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Licensed Materials - Property of IBM
+			 5725-I43 (C) Copyright IBM Corp. 2006, 2013. All Rights Reserved.
+			 US Government Users Restricted Rights - Use, duplication or
+             disclosure restricted by GSA ADP Schedule Contract with IBM Corp. --><!-- Attribute "id" must be identical to application folder name --><application xmlns="http://www.worklight.com/application-descriptor" id="MFPBank" platformVersion="7.0.0.00.20150312-0731">
+    <displayName>MFPBank</displayName>
+    <description>MFPBank</description>
+    <author>
+        <name>application's author</name>
+        <email>application author's e-mail</email>
+        <homepage>http://mycompany.com</homepage>
+        <copyright>Copyright My Company</copyright>
+    </author>
+    <mainFile>index.html</mainFile>
+    <features>
+        <JSONStore/>
+    </features>
+    <thumbnailImage>common/images/thumbnail.png</thumbnailImage>
+    <iphone bundleId="com.ibm.test1" version="1.0">
+        <worklightSettings include="false"/>
+        <pushSender password="xxxx" />
+        <security>
+            <encryptWebResources enabled="false"/>
+            <testWebResourcesChecksum enabled="false" ignoreFileExtensions="png, jpg, jpeg, gif, mp4, mp3"/>
+        </security>
+    </iphone>
+    <userIdentityRealms/>
+    <accessTokenExpiration>3600</accessTokenExpiration>
+    <android version="1.0">
+        <worklightSettings include="false"/>
+        <pushSender key="xxxxxx" senderId="xxxxx"/>
+        <security>
+            <encryptWebResources enabled="false"/>
+            <testWebResourcesChecksum enabled="false" ignoreFileExtensions="png, jpg, jpeg, gif, mp4, mp3"/>
+            <publicSigningKey/>
+            <packageName/>
+        </security>
+    </android>
+    <common/>
+</application>

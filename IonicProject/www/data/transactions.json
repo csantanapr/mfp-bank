@@ -1,0 +1,12 @@
+[
+  {
+    "transactionDate": "2015-04-20T12:40:10.766Z",
+    "transactionType": "Salary Deposit",
+    "transactionAmount": 1
+  },
+  {
+    "transactionDate": "2015-04-10T12:40:10.766Z",
+    "transactionType": "ATM Withdraw",
+    "transactionAmount": -1
+  }
+]

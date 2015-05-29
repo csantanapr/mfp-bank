@@ -1,0 +1,21 @@
+<ion-view view-title="{{label}}">
+  <ion-content>
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+    <ion-list>
+      <ion-item class="item-divider">
+        {{accountName}}
+      </ion-item>
+      <ion-item collection-repeat="item in items" item-height="60px">
+        <h3>{{item.transactionDate | date : 'mediumDate'}}</h3>
+        <p>{{item.transactionType}}
+          <span class="item-note" ng-style="item.transactionAmount < 0 ? {'color':'red'} : ''">
+            {{item.transactionAmount | currency}}
+         </span>
+        </p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

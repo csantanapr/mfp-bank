@@ -1,0 +1,65 @@
+/* Empty. Add your own CSS if you like */
+body {
+    position: static;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 300;
+}
+.bar {
+  background-color: #00B2EF;
+}
+.bar .title {
+  color: #fff;
+  font-size: 21px;
+}
+.button-clear.button-clear {
+  color: #fff;
+}
+.button.button-positive {
+  background-color:#17AF4B;
+  border-color: #17AF4B;
+}
+.button.button-positive.activate, .button.button-positive.activated {
+  background-color:#1DE93B;
+  border-color: #1DE93B;
+}
+.button.button-block {
+ width: 80%;
+ margin-left:auto;
+ margin-right:auto; 
+}
+.list label {
+  height: 75px;
+}
+input[type='number'] {
+    font-size: 22px;
+    text-align: center;
+}
+.menu-list .item-content, .menu-list .item {
+  background-color: #83d1f5;
+  color:#00648d; 
+  font-size:20px; 
+  border-color:#5FA5CA; 
+}
+.menu-list .list > .item:first-child {
+   margin-top:20px;
+}
+
+.menu-list img, .menu-list img {
+  width:40px; 
+}
+.offer-heading {
+    font-family: "HelveticaNeue-Regular", "Helvetica Neue Regular", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 400;
+}
+.home-list > a {
+  color:#00B2EF; 
+  font-size:20px
+}
+.home-list img {
+  width:40px;
+}
+.mfp-title {
+  height: 22px;
+  padding-right: 5px;
+}
+
