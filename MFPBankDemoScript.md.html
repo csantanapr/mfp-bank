@@ -1,0 +1,414 @@
+<h3 id="running-the-demo">Running the demo</h3>
+<h4 id="1-client-side-deployment-capabilities-making-client-side-sdks-available-for-developer-use-">1. Client-side deployment capabilities (making client side SDKs available for developer use)</h4>
+<ul>
+<li>[ ] Open Terminal and run webapp</li>
+</ul>
+<pre><code class="lang-bash">cd IonicProject
+ionic serve
+</code></pre>
+<ul>
+<li>[ ] Show Ionic UI WebApp that is just a website, fake check not camera API</li>
+<li>[ ] Start Eclipse from Desktop shortcut (MFP Studio)</li>
+<li>[ ] Select Workspace ~/Desktop/workspace/</li>
+<li>[ ] Create MobileFirst Project &quot;MFProject&quot;</li>
+<li>[ ] Create Hybrid App &quot;MFPBank&quot; select ios and android environments</li>
+<li>[ ] Terminal: Open folder with webapp assets</li>
+</ul>
+<pre><code class="lang-bash">open www
+</code></pre>
+<ul>
+<li>[ ] Copy over contents of www into MFPBank/common/ and replace all</li>
+<li>[ ] Run MFPBank -&gt; Run As -&gt; Run on MobileFirst Development Server</li>
+<li>[ ] Run Open MFPBank -&gt; Run As -&gt; Preview</li>
+<li>[ ] Show fake check</li>
+<li>[ ] Remove cordova.js if present</li>
+<li>[ ] Edit index.hmtl and move camera.js outside comment section</li>
+</ul>
+<pre><code class="lang-javascript">&lt;script src=&quot;js/mfp-services/camera.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<ul>
+<li>[ ] Click MBS Go/Refresh</li>
+<li>[ ] Show Camera API with different pictures</li>
+<li>[ ] Show Client SDKs merged files Android jars for Cordova and MFP</li>
+</ul>
+<h4 id="2-enterprise-integration-connectors">2. Enterprise Integration Connectors</h4>
+<ul>
+<li>[ ] Select MFProject/adapters -&gt; New -&gt; MobileFirst Adapter</li>
+<li>[ ] Type &quot;HTTP&quot;  and Name &quot;CloudantAdapter&quot;</li>
+<li>[ ] Remove one procedure</li>
+<li>[ ] Rename other procedure to &quot;getAllDocs&quot;</li>
+<li>[ ] Edit Connectivity Policy protocol=&quot;https&quot;, port=&quot;443&quot;, domain=<code>host for cloudant account</code></li>
+<li>[ ] Add Authentication</li>
+<li>[ ] Add Basic</li>
+<li>[ ] Edit username <code>username from cloudant account</code></li>
+<li>[ ] Edit password <code>password from cloudant account</code></li>
+<li>[ ] Edit Adapter JavaScript code</li>
+</ul>
+<pre><code class="lang-javascript">
+function getAllDocs(name, limit, include_docs) {
+
+    var useRealData = false;
+
+    if (useRealData === true){
+        var method = &quot;getAllDocs&quot;;
+        var msg = &quot;method: &lt;&quot; + method + &quot;&gt; called.&quot;;
+        WL.Logger.info(msg);
+
+        var path = name + &#39;/_all_docs?include_docs=&#39; + include_docs;
+        if ((limit !== null) &amp;&amp; (!isNaN(limit))) {
+            path = path + &quot;&amp;limit=&quot; + limit;
+        }
+
+        WL.Logger.info(&quot;Path: &quot; + path);
+        var input = {
+                method : &#39;get&#39;,
+                returnedContentType : &#39;json&#39;,
+                path : path,
+            };
+
+        return WL.Server.invokeHttp(input);
+
+    } else {
+        return {
+            rows: [{
+                doc:{
+                    _id: &quot;064e98bcffed38fc4283025047e2659e&quot;,
+                    _rev: &quot;1-e5de0c639a92863de469f587ac367a5b&quot;,
+                    description: &quot;10% off on any regular price item at MFP Foods stores. Valid on Sunday, May 03, 2015 to Saturday May 09, 2015. Valid in US Only. Excludes Manhattan stores.&quot;,
+                    imageUrl: &quot;img/barcode.png&quot;,
+                    title: &quot;10% off on MFP Foods&quot;
+                }
+            },
+            {
+                doc:{
+                    _id: &quot;4c1282dbc73060ef37f4a1ffcff658a9&quot;,
+                    _rev: &quot;2-8dd05799b6d9e347b5eff4a5812c99cd&quot;,
+                    description: &quot;Buy any 5 gallon paint and get $5.00 cash rebate. Present coupon at MFP Home Improvement stores.Valid on Sunday, May 03, 2015 to Saturday May 09, 2015. Valid in US Only. Excludes Manhattan stores.&quot;,
+                    imageUrl: &quot;img/barcode.png&quot;,
+                    title: &quot;$5 back on paint at MFP Home Improvement&quot;
+                }
+            },
+            {
+                doc:{
+                    _id: &quot;910a9f4b43b53223f307b152d681a733&quot;,
+                    _rev: &quot;1-1a691ff687760514280500b87dee71e9&quot;,
+                    description: &quot;Get as low as 2.2% interest rate on your car loan. Model year 2016-2014.Valid during the month of May 2015.&quot;,
+                    imageUrl: &quot;img/car.png&quot;,
+                    title: &quot;2.2% APR new car loans&quot;
+                }
+            }
+            ]
+        };
+    }
+}
+</code></pre>
+<ul>
+<li>[ ] Edit index.html and move <code>offers_cloudant.js</code> outside comment area</li>
+</ul>
+<pre><code class="lang-javascript">&lt;script src=&quot;js/mfp-services/offers_cloudant.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<ul>
+<li>[ ] Refresh MBS</li>
+<li>[ ] Show Offers from Cloudant DB</li>
+</ul>
+<h4 id="3-business-logic">3. Business Logic</h4>
+<ul>
+<li>[ ] <strong>Important</strong> Import SQL Library Jar into <code>server/lib/</code> from <code>demofiles/mysql-connector-java-5.1.35-bin.jar</code></li>
+<li>[ ] Select MFProject/adapters -&gt; New -&gt; MobileFirst Adapter</li>
+<li>[ ] Type <em>SQL</em>  and Name <em>SQLBank</em></li>
+<li>[ ] Remove one procedure</li>
+<li>[ ] Rename other procedure to &quot;getAccountTransactions&quot;</li>
+<li>[ ] Edit Connection Data Source Definition</li>
+<li>[ ] Edit Url with MySQL DB host and DB name like &quot;jdbc:mysql://localhost:3306/mobilefirst_training&quot;</li>
+<li>[ ] Edit username like &quot;root&quot; </li>
+<li>[ ] Edit password like &quot;root&quot;</li>
+<li>[ ] Edit Adapter JavaScript code</li>
+</ul>
+<pre><code class="lang-javascript">
+var getAccountsTransactionsStatement = WL.Server.createSQLStatement(
+    &quot;SELECT fromAccount, toAccount, transactionDate, transactionAmount, transactionType &quot; +
+    &quot;FROM accounttransactions &quot; +
+    &quot;WHERE accounttransactions.fromAccount = ? OR accounttransactions.toAccount = ? &quot; +
+    &quot;ORDER BY transactionDate DESC &quot; +
+    &quot;LIMIT 20;&quot;
+);
+
+//Invoke prepared SQL query and return invocation result
+function getAccountTransactionsFromDB(accountId){
+    return WL.Server.invokeSQLStatement({
+        preparedStatement : getAccountsTransactionsStatement,
+        parameters : [accountId, accountId]
+    });
+}
+
+//Iterate over data and transform withdraws to negative amounts, and delete data not need it for mobile client
+function getAccountTransactions(accountId){
+
+    var useRealData = false;
+
+    if (useRealData === true){
+        var results = getAccountTransactionsFromDB(accountId);
+        var i;
+        //iterate over results to conver to negative amount any withdraws, this is how client app expects the data
+        if(results.resultSet &amp;&amp; results.resultSet.length&gt;0)
+         {
+            for(i=0;i&lt;results.resultSet.length;i++)
+                {
+                    if(results.resultSet[i].fromAccount === accountId){
+                    results.resultSet[i].transactionAmount=-Math.abs(results.resultSet[i].transactionAmount);
+                    }
+                    delete results.resultSet[i].fromAccount;
+                    delete results.resultSet[i].toAccount;
+                }
+         }
+        return results;
+
+    } else {
+
+        return {
+            resultSet:[{
+                transactionAmount: -180,
+                transactionDate: &quot;2009-03-11T11:08:39.000Z&quot;,
+                transactionType: &quot;Funds Transfer&quot;
+            },{
+                transactionAmount: -130,
+                transactionDate: &quot;2009-03-07T11:09:39.000Z&quot;,
+                transactionType: &quot;ATM Withdrawal&quot;
+            },{
+                transactionAmount: -150,
+                transactionDate: &quot;2009-03-04T10:35:24.000Z&quot;,
+                transactionType: &quot;Funds Transfer&quot;
+            },{
+                transactionAmount: -150,
+                transactionDate: &quot;2009-03-03T11:09:39.000Z&quot;,
+                transactionType: &quot;Check Withdrawal&quot;
+            },{
+                transactionAmount: 9050,
+                transactionDate: &quot;2009-03-01T11:09:39.000Z&quot;,
+                transactionType: &quot;Deposit&quot;
+            }]
+        };
+    }
+
+
+}
+</code></pre>
+<ul>
+<li>[ ] Edit <code>index.html</code> and move <code>transactions_sql.js</code> outside comment area</li>
+</ul>
+<pre><code class="lang-javascript">&lt;script src=&quot;js/mfp-services/transactions_sql.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<ul>
+<li>[ ] Refresh MBS</li>
+<li>[ ] Show Transactions from SQL DB</li>
+</ul>
+<h4 id="4-identity">4. Identity</h4>
+<ul>
+<li>[ ] Open <code>server/conf/authenticationConfig.xml</code></li>
+<li>[ ] Add the customSecurityTest inside the <code>securityTests</code> xml element</li>
+</ul>
+<pre><code class="lang-xml">
+&lt;customSecurityTest name=&quot;MFPBank-securityTest&quot;&gt;
+              &lt;test isInternalUserID=&quot;true&quot; realm=&quot;SampleAppRealm&quot;/&gt;
+              &lt;test isInternalDeviceID=&quot;true&quot; realm=&quot;wl_deviceNoProvisioningRealm&quot; /&gt;
+&lt;/customSecurityTest&gt;
+</code></pre>
+<ul>
+<li>[ ] Edit <em>SQLBank</em> Adapter</li>
+<li>[ ] Edit getAccountTransactions procedure</li>
+<li>[ ] Edit Security Test to <em>MFPBank-securityTest</em></li>
+<li>[ ] Edit <code>index.html</code> and move <code>authenticate.js</code> outside comment area</li>
+</ul>
+<pre><code class="lang-javascript">
+&lt;script src=&quot;js/mfp-services/authenticate.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h4 id="5-data-synchronization-offline-data-sync">5. Data Synchronization/Offline Data Sync</h4>
+<ul>
+<li>[ ] <strong>Important</strong> Edit application-descriptor.xml</li>
+<li>[ ] Select Optional Features</li>
+<li>[ ] Add JSONStore</li>
+<li>[ ] <strong>Important</strong> Edit <code>index.htm</code> and move <code>json_store.js</code> outside comment area</li>
+</ul>
+<pre><code class="lang-javascript">&lt;script src=&quot;js/mfp-services/json_store.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<ul>
+<li>[ ] Open QuickTime and show iPhone Screen, touch screen</li>
+<li>[ ] Select iphone right click and select Run As -&gt; Xcode Project</li>
+<li>[ ] Xcode Clean</li>
+<li>[ ] Xcode Run -&gt; Device iPhone</li>
+<li>[ ] Select MFProjectMFPBankAndroid project, right click and select Run As -&gt; Android Application</li>
+<li>[ ] Show Offers from Cloudant DB and go back to home</li>
+<li>[ ] Put Device in Airplane mode</li>
+<li>[ ] Show Webpage broken with no network</li>
+<li>[ ] Return to MFPBank</li>
+<li>[ ] Show Offers from Offline JSON Store</li>
+<li>[ ] Stop Xcode Debugger and minimize Quick Time</li>
+<li>[ ] Remove MFPBank from iPhone</li>
+</ul>
+<h4 id="6-engagement-services-">6. Engagement services</h4>
+<ul>
+<li>[ ] Select MFProject/adapters -&gt; New -&gt; MobileFirst Adapter</li>
+<li>[ ] Type &quot;HTTP&quot;  and Name &quot;PushAdapter&quot;</li>
+<li>[ ] Rename procedure getStories to <em>processTransfer</em></li>
+<li>[ ] Add Security Test <em>MFPBank-securityTest</em></li>
+<li>[ ] Rename procedure getStoriesFiltered to <em>processCheck</em></li>
+<li>[ ] Add Security Test <em>MFPBank-securityTest</em></li>
+<li>[ ] Edit Adapter JavaScript code</li>
+</ul>
+<pre><code class="lang-javascript">
+function processTransfer(transfer) {
+
+    WL.Logger.info(&#39;Processing transfer...&#39;);
+    sendNotification(&#39;Transfer for $&#39;+transfer+&#39; successfuly processed&#39;);
+    return {
+        result : transfer
+    };
+}
+
+function processCheck(check) {
+
+    WL.Logger.info(&#39;Processing check deposit...&#39;);
+    sendNotification(&#39;Check Successfuly Deposit&#39;);
+    return {
+        result : check
+    };
+}
+function sendNotification(notificationText,payload) {
+    var notificationOptions = {};
+    notificationOptions.message = {};
+    notificationOptions.message.alert = notificationText;
+    notificationOptions.settings = {
+            apns:{
+                sound:&#39;default&#39;
+            }
+    };
+    WL.Server.sendMessage(&quot;MFPBank&quot;, notificationOptions);
+
+    return {
+        result : &quot;Notification sent to all users.&quot;
+    };
+}
+</code></pre>
+<ul>
+<li>[ ] Edit <code>index.html</code> and move <code>deposit_notification.js</code> and <code>transfer_notification.js</code> outside comment area</li>
+</ul>
+<pre><code class="lang-javascript">&lt;script src=&quot;js/mfp-services/deposit_notification.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/mfp-services/transfer_notification.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<ul>
+<li>[ ] <strong>Important</strong> Add <code>apns-certificate-sandbox.p12</code> files to <code>MFPBank/</code></li>
+<li>[ ] <strong>Important</strong> Edit <code>application-descriptor.xml</code></li>
+<li>[ ] Select iphone environment</li>
+<li>[ ] Add Push Sender</li>
+<li>[ ] Edit p12 password</li>
+<li>[ ] Select android environment</li>
+<li>[ ] Add Push Sender</li>
+<li>[ ] Edit Key and enter GCM API Key</li>
+<li>[ ] Edit Sender ID and enter GCM Project Number</li>
+<li>[ ] Add Android Library Project for Google Play Servers from Android <code>&lt;android sdk&gt;/extras/google/google_play_services/libproject</code></li>
+<li>[ ] Add Android libproject as a Android reference in `MFProjectMFPBankAndroid-&gt;Properties-&gt;Android)</li>
+<li>[ ] Edit <code>MFProjectMFPBankAndroid/AndroidManifest.xml</code> add in <code>&lt;application&gt;</code></li>
+</ul>
+<pre><code class="lang-xml">&lt;meta-data 
+    android:name=&quot;com.google.android.gms.version&quot; 
+    android:value=&quot;@integer/google_play_services_version&quot; /&gt;
+</code></pre>
+<ul>
+<li>[ ] Open QuickTime and display iPhone screen</li>
+<li>[ ] Disable Airplane mode and show webpage working</li>
+<li>[ ] Run iphone -&gt; Run As -&gt; Xcode Project</li>
+<li>[ ] <strong>Important</strong> Double check that old MFPBank is not installed</li>
+<li>[ ] <strong>Important</strong> Edit Xcode Project settings real BundleID <em>com.ibm.test1</em></li>
+<li>[ ] <strong>Important</strong> Edit Team for Provisioning Profile setting</li>
+<li>[ ] Xcode Clean</li>
+<li>[ ] Xcode Run -&gt; Device iPhone</li>
+<li>[ ] Do Transfer for $100</li>
+<li>[ ] Enter credentials <em>carlos</em> <em>password</em></li>
+<li>[ ] Show Push Notification working</li>
+<li>[ ] Stop Xcode Debugger and minimize Quick Time</li>
+</ul>
+<h4 id="7-data-analytics">7. Data/Analytics</h4>
+<ul>
+<li>[ ] MFProject -&gt; Open MobileFirst Console</li>
+<li>[ ] Open Analytics Console</li>
+<li>[ ] Show Tabs Dashboard, Devices, Network, Servers</li>
+<li>[ ] Open <code>js/controllers</code> show Analytics API for accounts, offers</li>
+<li>[ ] Return to Analytics Console</li>
+<li>[ ] Go to Dashboard-&gt;Custom Charts</li>
+<li>[ ] Add new Chart</li>
+<li>[ ] Enter Char Title <em>AppView Analytics for MFPBank</em></li>
+<li>[ ] Select <em>Custom Activies</em></li>
+<li>[ ] Select <em>Pie Chart</em> Type</li>
+<li>[ ] Select Property <em>AppView</em></li>
+<li>[ ] Save the new Chart</li>
+<li>[ ] MFPBak -&gt; Run Preview</li>
+<li>[ ] Use iPone only -&gt; Use Offers multiple times</li>
+<li>[ ] Return to Analytics Console and show Pie Chart change</li>
+</ul>
+<h4 id="8-app-management">8. App Management</h4>
+<ul>
+<li>[ ] Open MobileFirst Console</li>
+<li>[ ] Show the adapters and delete Cloudant Adapter</li>
+<li>[ ] Edit CloudantAdapter.js and save</li>
+</ul>
+<pre><code class="lang-javascript">WL.Logger.info(&quot;message from cloudant adapter&quot;);
+</code></pre>
+<ul>
+<li>[ ] Open MobileFirst Console and show the adapter</li>
+<li>[ ] Edit <code>common/tempaltes/home.html</code></li>
+<li>[ ] Open QuickTime and show iPhone</li>
+<li>[ ] Show current version of App</li>
+<li>[ ] Remove offers from top section</li>
+<li>[ ] Uncomment from bottom section</li>
+<li>[ ] Run -&gt; deploy on Development Server</li>
+<li>[ ] Run Old version of App on iPhone and see direct update progress</li>
+<li>[ ] Open MobileFirst Console and go to Applications</li>
+<li>[ ] Disable access for MFPBank iphone</li>
+<li>[ ] Set url to <a href="http://ibm.com">http://ibm.com</a> and message to &quot;This version of MFPBank is block please upgrade&quot;</li>
+<li>[ ] Show QuickTime and kill MFPBank</li>
+<li>[ ] Run MFPBank again and see Disable message and tab upgrade button</li>
+</ul>
+<h4 id="9-deployment">9. Deployment</h4>
+<ul>
+<li>[ ] Open MobileFirst Console on Remote MFP Server on VM/Docker running on Bluemix <a href="http://x.x.x.x:10080/worklightconsole">http://x.x.x.x:10080/worklightconsole</a></li>
+<li>[ ] Show 0 adapters, apps, devices</li>
+<li>[ ] Deploy Adapters to refresh build .apapters</li>
+<li>[ ] Change MFP Server MFPBank -&gt; Run As - &gt; Build Settings and Deploy Target</li>
+<li>[ ] Select Checkbox Build app to work with a different server</li>
+<li>[ ] Edit Remote Server: <a href="http://x.x.x.x:10080">http://x.x.x.x:10080</a></li>
+<li>[ ] Edit Context path: <em>/MFProject</em></li>
+<li>[ ] Run As -&gt; Build All Environments</li>
+<li>[ ] Upload Adapter and Apps using MobileFirst Console</li>
+<li>[ ] Run As -&gt; Xcode Project</li>
+<li>[ ] Run App on iPhone</li>
+<li>[ ] Run As -&gt; Android Application</li>
+<li>[ ] Open MobileFirst Console and show the new registered apps</li>
+<li>[ ] Show how to disable Builds for Remote Serve, uncheck in Run As - &gt; Build Settings and Deploy Target</li>
+</ul>
+<h4 id="10-quality-life-cycle-management">10. Quality Life-Cycle Management</h4>
+<ul>
+<li>[ ] Open MobileFirst Console</li>
+<li>[ ] Open Client Log Profiles</li>
+<li>[ ] Add a new Profile for MFPBank</li>
+<li>[ ] Run App on iPhone or MBS and use it to generate Logs</li>
+<li>[ ] Open Analytics Console and go to Search Tab</li>
+<li>[ ] Show analytics Client Logs</li>
+<li>[ ] Show info Server Logs (download within 1 Day)</li>
+<li>[ ] Edit Eclipse preferences -&gt; MobileFirst -&gt; Templates and Components </li>
+<li>[ ] Download Worklight JavaScript SDK (demofiles/mfpcomponents/MQA-1.9.19-saas.wlc)into $HOME/IBM/templates/</li>
+<li>[ ] If using MFP CLI then extract MQA.js from MQA-1.9.19-saas.wlc into common/js/MQA.js</li>
+<li>[ ] Select MFProject -&gt; Add Application Component</li>
+<li>[ ] Edit <code>index.html</code> and move <code>deposit_notification.js</code> and <code>transfer_notification.js</code> outside comment area</li>
+</ul>
+<pre><code class="lang-javascript">&lt;script src=&quot;js/MQA.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/mfp-services/quality_assurance.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<ul>
+<li>[ ] Edit <code>js/mfp-services/quality_assurance.js</code></li>
+<li>[ ] Enter MQA API Key for ios and android</li>
+<li>[ ] Run As - Deploy to Development Server</li>
+<li>[ ] Runs As -&gt; Xcode Project</li>
+<li>[ ] Shake iPhone to report Bug</li>
+<li>[ ] Use Menu to submit feedback</li>
+<li>[ ] Show MQA Console</li>
+</ul>
