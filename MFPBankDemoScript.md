@@ -421,6 +421,7 @@ WL.Logger.info("message from cloudant adapter");
 <script src="js/MQA.js" type="text/javascript"></script>
 <script src="js/mfp-services/quality_assurance.js"></script>
 ```
+
 - [ ] Edit `js/mfp-services/quality_assurance.js`
 - [ ] Enter MQA API Key for ios and android
 - [ ] Run As - Deploy to Development Server
