@@ -317,10 +317,16 @@ function sendNotification(notificationText,payload) {
 - [ ] Select iphone environment
 - [ ] Add Push Sender
 - [ ] Edit p12 password
-- [ ] Select android environment
-- [ ] Add Push Sender
-- [ ] Edit Key and enter GCM API Key
-- [ ] Edit Sender ID and enter GCM Project Number
+- [ ] Select android environment in application-descriptor.xml
+- [ ] Add Push Sender to application-descriptor inside the android element <android version="1.0"> </android>
+
+<pushSender key="xxxxxx" senderId="xxxxx"/>
+
+- [ ] Enter a value for key and senderId attributes of pushSender
+
+<pushSender key="xxxxxx" senderId="xxxxx"/>
+
+- [ ] key corresponds to Server API Key and senderID corresponds to Project Number from Google Developer Console
 - [ ] Add Android Library Project for Google Play Servers from Android `<android sdk>/extras/google/google_play_services/libproject`
 - [ ] Add Android libproject as a Android reference in `MFProjectMFPBankAndroid->Properties->Android)
 - [ ] Edit `MFProjectMFPBankAndroid/AndroidManifest.xml` add in `<application>`
